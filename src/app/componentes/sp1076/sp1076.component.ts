@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConsultasSPService } from '../../servicios/consultasSP.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { Label, Color } from 'ng2-charts';
+import { Label } from 'ng2-charts';
+import { ItemSP1076Interface } from '../../modelos/itemSP1076.interface';
 
 declare let jQuery:any;
 declare let $:any;
@@ -12,13 +13,15 @@ declare let $:any;
   styleUrls: ['./sp1076.component.css']
 })
 export class Sp1076Component implements OnInit {
-  
+
+  tamano:number = 10;
   vendedores = [{ve_codven:0, ve_nomven:'Todos'}];
   locales = [{lc_codloc:0, lc_nomloc:'Todos'}];
   dataSP = [];
-  montoCre = [];
-  montoVta = [];
+  montoCre:number[] = [];
+  montoVta:number[] = [];
   meses = [];
+  mesPorComparar : ItemSP1076Interface = {};
 
   constructor(private serConsulta: ConsultasSPService) { }
 
@@ -58,6 +61,13 @@ export class Sp1076Component implements OnInit {
       /* lleno data con lo que me devuelve el SP */
       this.dataSP = data;
 
+      /* da vuelta el arreglo */
+      this.dataSP.reverse();
+      /* elimina el ultimo elemento y lo retorna */
+      this.mesPorComparar = this.dataSP.pop();
+      /* volvemos a dar vuelta el arreglo */
+      this.dataSP.reverse();
+
       console.log(this.dataSP);
 
       this.dataSP.map(elem => {
@@ -65,42 +75,18 @@ export class Sp1076Component implements OnInit {
         let periodo = '';
 
         switch (elem.TM_MESPER) {
-          case 1:
-            periodo = 'Enero '+elem.TM_ANOPER;
-            break;
-          case 2:
-            periodo = 'Febrero '+elem.TM_ANOPER;
-            break;
-          case 3:
-            periodo = 'Marzo '+elem.TM_ANOPER;
-            break;
-          case 4:
-            periodo = 'Abril '+elem.TM_ANOPER;
-            break;
-          case 5:
-            periodo = 'Mayo '+elem.TM_ANOPER;
-            break;
-          case 6:
-            periodo = 'Junio '+elem.TM_ANOPER;
-            break;
-          case 7:
-            periodo = 'Julio '+elem.TM_ANOPER;
-            break;
-          case 8:
-            periodo = 'Agosto '+elem.TM_ANOPER;
-            break;
-          case 9:
-            periodo = 'Septiembre '+elem.TM_ANOPER;
-            break;
-          case 10:
-            periodo = 'Octubre '+elem.TM_ANOPER;
-            break;
-          case 11:
-            periodo = 'Noviembre '+elem.TM_ANOPER;
-            break;
-          case 12:
-            periodo = 'Diciembre '+elem.TM_ANOPER;
-            break;
+          case 1: periodo = 'Enero '+elem.TM_ANOPER; break;
+          case 2: periodo = 'Febrero '+elem.TM_ANOPER; break;
+          case 3: periodo = 'Marzo '+elem.TM_ANOPER; break;
+          case 4: periodo = 'Abril '+elem.TM_ANOPER; break;
+          case 5: periodo = 'Mayo '+elem.TM_ANOPER; break;
+          case 6: periodo = 'Junio '+elem.TM_ANOPER; break;
+          case 7: periodo = 'Julio '+elem.TM_ANOPER; break;
+          case 8: periodo = 'Agosto '+elem.TM_ANOPER; break;
+          case 9: periodo = 'Septiembre '+elem.TM_ANOPER; break;
+          case 10: periodo = 'Octubre '+elem.TM_ANOPER; break;
+          case 11: periodo = 'Noviembre '+elem.TM_ANOPER; break;
+          case 12: periodo = 'Diciembre '+elem.TM_ANOPER; break;
         }
 
         this.meses.push(periodo);
@@ -113,7 +99,7 @@ export class Sp1076Component implements OnInit {
       /* for(let i = 0; i < this.dataSP.length; i++){
         this.meses[i] = this.meses[i] + " " + this.dataSP[i].TM_ANOPER;
       } */
-
+      
     });
   }
 
@@ -134,8 +120,8 @@ export class Sp1076Component implements OnInit {
   public barChartLegend = true;
 
   public barChartData: ChartDataSets[] = [
-    { borderWidth: 2, data: this.montoCre, label: 'Monto Cre' },
-    { borderWidth: 2, data: this.montoVta, label: 'Monto Vta' }
+    { borderWidth: 2, data: this.montoCre, label: 'Monto Credito' },
+    { borderWidth: 2, data: this.montoVta, label: 'Monto Venta' }
   ];
 
   // events

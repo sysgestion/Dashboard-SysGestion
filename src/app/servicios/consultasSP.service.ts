@@ -10,7 +10,7 @@ export class ConsultasSPService {
   private _headers:HttpHeaders = new HttpHeaders();
   constructor(private http: HttpClient) { }
   
-  consultaSP1076(inicio:string, termino: string, vendedor:number, local:number){
+  consultaSP1076(inicio:string, termino: string, vendedor:number, local:number) {
     let headers = this._headers.append('Content-Type', 'application/json');
     
     let params = new HttpParams();

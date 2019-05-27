@@ -7,7 +7,9 @@ body {
     font-family: 'Titillium Web', sans-serif;
 }
 
-
+.ng-invalid.ng-touched:not(form) {
+    border: 1px solid red;
+}
 
 /* Animaciones */
 

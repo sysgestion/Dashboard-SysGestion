@@ -15,4 +15,4 @@ const RUTAS: Routes = [
 ];
 
 //, { enableTracing: true }  registra movimientos de rutas en la consola del navegador
-export const APP_RUTAS = RouterModule.forRoot(RUTAS);
+export const APP_RUTAS = RouterModule.forRoot(RUTAS, {useHash:true} );

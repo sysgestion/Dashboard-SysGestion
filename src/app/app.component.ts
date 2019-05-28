@@ -14,6 +14,7 @@ export class AppComponent {
 
   title = 'cliente-dashboard-sys';
   public app_nombre: string = "SysGestion";
+  isLogeado:boolean = false;
 
   constructor() { 
     $(document).ready(function () {

@@ -23,6 +23,11 @@ export class Sp1076Component implements OnInit {
   meses = [];
   mesPorComparar : ItemSP1076Interface = {};
 
+  inicio:string;
+  termino:string;
+  vendedor:number;
+  local:number;
+
   constructor(private serConsulta: ConsultasSPService) { }
 
   ngOnInit() {
@@ -50,13 +55,13 @@ export class Sp1076Component implements OnInit {
 
   cargarGrafico(){
 
-    let inicio = $( "#inicio" ).val();
-    let termino = $( "#termino" ).val();
-    let vendedor = $( "#vendedor" ).val();
-    let local = $("#local").val();
+    this.inicio = $( "#inicio" ).val();
+    this.termino = $( "#termino" ).val();
+    this.vendedor = $( "#vendedor" ).val();
+    this.local = $("#local").val();
     
 
-    this.serConsulta.consultaSP1076(inicio, termino, vendedor, local).subscribe(data => {
+    this.serConsulta.consultaSP1076(this.inicio, this.termino, this.vendedor, this.local).subscribe(data => {
 
       /* lleno data con lo que me devuelve el SP */
       this.dataSP = data;

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ConsultasSPService } from '../../servicios/consultasSP.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { ItemSP1076Interface } from '../../modelos/itemSP1076.interface';
 
 declare let jQuery:any;
 declare let $:any;
@@ -21,7 +20,7 @@ export class Sp1076Component implements OnInit {
   montoCre:number[] = [];
   montoVta:number[] = [];
   meses = [];
-  mesPorComparar : ItemSP1076Interface = {};
+  mesPorComparar = {};
 
   inicio:string;
   termino:string;
@@ -70,6 +69,7 @@ export class Sp1076Component implements OnInit {
       this.dataSP.reverse();
       /* elimina el ultimo elemento y lo retorna */
       this.mesPorComparar = this.dataSP.pop();
+      
       /* volvemos a dar vuelta el arreglo */
       this.dataSP.reverse();
 

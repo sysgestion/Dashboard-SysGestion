@@ -13,6 +13,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { Sp1076Component } from './componentes/sp1076/sp1076.component';
+import { GetMesPipe } from './pipes/get-mes.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { Sp1076Component } from './componentes/sp1076/sp1076.component';
     HomeComponent,
     LoginComponent,
     RegistroComponent,
-    Sp1076Component
+    Sp1076Component,
+    GetMesPipe
   ],
   imports: [
     BrowserModule,

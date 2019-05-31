@@ -13,7 +13,7 @@ declare let $:any;
 })
 export class Sp1076Component implements OnInit {
 
-  tamano:number = 10;
+  tamano:number = 15;
   vendedores = [{ve_codven:0, ve_nomven:'Todos'}];
   locales = [{lc_codloc:0, lc_nomloc:'Todos'}];
   dataSP = [];
@@ -21,6 +21,7 @@ export class Sp1076Component implements OnInit {
   montoVta:number[] = [];
   meses = [];
   mesPorComparar = {};
+  cargandoDatos:boolean = false;
 
   inicio:string;
   termino:string;
@@ -54,14 +55,18 @@ export class Sp1076Component implements OnInit {
 
   cargarGrafico(){
 
+    this.cargandoDatos = true;
+    
     this.inicio = $( "#inicio" ).val();
     this.termino = $( "#termino" ).val();
     this.vendedor = $( "#vendedor" ).val();
     this.local = $("#local").val();
     
-
+    
     this.serConsulta.consultaSP1076(this.inicio, this.termino, this.vendedor, this.local).subscribe(data => {
-
+      
+      this.cargandoDatos = false;
+      
       /* lleno data con lo que me devuelve el SP */
       this.dataSP = data;
 

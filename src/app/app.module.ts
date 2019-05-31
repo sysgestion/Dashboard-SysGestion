@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
 
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 import { APP_RUTAS } from './app.rutas';
 
 import { AppComponent } from './app.component';
@@ -14,6 +16,7 @@ import { LoginComponent } from './componentes/login/login.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { Sp1076Component } from './componentes/sp1076/sp1076.component';
 import { GetMesPipe } from './pipes/get-mes.pipe';
+import { MonedaChilenaPipe } from './pipes/moneda-chilena.pipe';
 
 @NgModule({
   declarations: [
@@ -24,13 +27,15 @@ import { GetMesPipe } from './pipes/get-mes.pipe';
     LoginComponent,
     RegistroComponent,
     Sp1076Component,
-    GetMesPipe
+    GetMesPipe,
+    MonedaChilenaPipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ChartsModule,
     FormsModule,
+    BsDatepickerModule.forRoot(),
     APP_RUTAS
   ],
   providers: [],

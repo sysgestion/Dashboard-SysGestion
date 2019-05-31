@@ -8,6 +8,7 @@ export class GetMesPipe implements PipeTransform {
   transform(value: number): string {
 
     let salida:string;
+    
     switch (value) {
       case 1: salida = 'Enero'; break;
       case 2: salida = 'Febrero'; break;

@@ -17,9 +17,6 @@ export class Sp1076Component implements OnInit {
   vendedores = [{ve_codven:0, ve_nomven:'Todos'}];
   locales = [{lc_codloc:0, lc_nomloc:'Todos'}];
   dataSP = [];
-  montoCre:number[] = [];
-  montoVta:number[] = [];
-  meses = [];
   mesPorComparar = {};
   cargandoDatos:boolean = false;
 
@@ -44,15 +41,6 @@ export class Sp1076Component implements OnInit {
     });
   }
 
-  /* reset(){
-
-    this.dataSP = [];
-    this.montoCre = [];
-    this.montoVta = [];
-    this.meses = [];
-
-  } */
-
   cargarGrafico(){
 
     this.cargandoDatos = true;
@@ -64,7 +52,7 @@ export class Sp1076Component implements OnInit {
     
     
     this.serConsulta.consultaSP1076(this.inicio, this.termino, this.vendedor, this.local).subscribe(data => {
-      
+
       this.cargandoDatos = false;
       
       /* lleno data con lo que me devuelve el SP */
@@ -79,6 +67,10 @@ export class Sp1076Component implements OnInit {
       this.dataSP.reverse();
 
       console.log(this.dataSP);
+
+      const montoCredito =  [];
+      const montoVenta = [];
+      const meses = [];
 
       this.dataSP.map(elem => {
 
@@ -99,18 +91,18 @@ export class Sp1076Component implements OnInit {
           case 12: periodo = 'Diciembre '+elem.TM_ANOPER; break;
         }
 
-        this.meses.push(periodo);
-        //this.anios.push(elem.TM_ANOPER);
-        this.montoCre.push(elem.TM_MTOCRE);
-        this.montoVta.push(elem.TM_MTOVTA);
-      });
+        meses.push(periodo);
+        montoCredito.push(elem.TM_MTOCRE);
+        montoVenta.push(elem.TM_MTOVTA);
 
-      /* le pone el ano a cada mes del arreglo meses */
-      /* for(let i = 0; i < this.dataSP.length; i++){
-        this.meses[i] = this.meses[i] + " " + this.dataSP[i].TM_ANOPER;
-      } */
+      });
+      
+      this.barChartLabels = meses;
+      this.barChartData[0].data = montoCredito;
+      this.barChartData[1].data = montoVenta;
       
     });
+
   }
 
   public barChartOptions: ChartOptions = {
@@ -125,13 +117,13 @@ export class Sp1076Component implements OnInit {
   };
 
   
-  public barChartLabels: Label[] = this.meses;
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
 
   public barChartData: ChartDataSets[] = [
-    { borderWidth: 2, data: this.montoCre, label: 'Monto Credito' },
-    { borderWidth: 2, data: this.montoVta, label: 'Monto Venta' }
+    { borderWidth: 2, data: [], label: 'Monto Credito' },
+    { borderWidth: 2, data: [], label: 'Monto Venta' }
   ];
 
   // events

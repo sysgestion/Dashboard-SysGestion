@@ -1,0 +1,21 @@
+
+/* #inicio[type="date"] #termino[type="date"]{
+    
+    /* aqui tengo que agregar el atributo bsDatepicker de los input inicio y termino en las pantallas pequeñas
+    aqui tengo que asignar el valor de text al atributo type
+} */
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+    /* pantallas pequeñas
+    #inicio #termino{
+        aqui tengo que quitar el atributo bsDatepicker de los input inicio y termino en las pantallas pequeñas
+        aqui tengo que asignar el valor de date al atributo type
+    } */
+
+}

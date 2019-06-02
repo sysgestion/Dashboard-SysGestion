@@ -7,7 +7,8 @@
     <div class="form-row">
       <div class="col form-group">
         <label class="my-1 mr-2" for="inicio">Inicio</label>
-        <input [(ngModel)]="inicio" name="inicio" type="text" class="form-control form-control-sm" id="inicio" placeholder="Inicio" bsDatepicker required>
+        <!-- debo quitar el type cuando funcione el css con la mediaquery -->
+        <input [(ngModel)]="inicio" name="inicio" type="date" class="form-control form-control-sm" id="inicio" placeholder="Inicio" required>
         <label class="my-1 mr-2" for="vendedor">Vendedor</label>
         <select class="form-control form-control-sm" id="vendedor">
           <option *ngFor="let i of vendedores" [value]="i.ve_codven">{{i.ve_codven + " - " + i.ve_nomven | titlecase}}</option>
@@ -15,7 +16,7 @@
       </div>
       <div class="col">
           <label class="my-1 mr-2" for="termino">Termino</label>
-          <input [(ngModel)]="termino" name="termino" type="text" class="form-control form-control-sm" id="termino" placeholder="Termino" bsDatepicker required>
+          <input [(ngModel)]="termino" name="termino" type="date" class="form-control form-control-sm" id="termino" placeholder="Termino" required>
           <label class="my-1 mr-2" for="local">Local</label>
           <select class="form-control form-control-sm" id="local">
             <option *ngFor="let i of locales;" [value]="i.lc_codloc">{{i.lc_codloc + " - " + i.lc_nomloc | titlecase }}</option>

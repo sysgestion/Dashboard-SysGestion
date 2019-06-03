@@ -13,65 +13,92 @@ declare let $:any;
 })
 export class Sp1076Component implements OnInit {
 
-  tamano:number = 15;
-  vendedores = [{ve_codven:0, ve_nomven:'Todos'}];
-  locales = [{lc_codloc:0, lc_nomloc:'Todos'}];
-  dataSP = [];
-  mesPorComparar = {};
-  cargandoDatos:boolean = false;
+  public tamano:number = 15;
+  public vendedores = [{ve_codven:0, ve_nomven:'Todos'}];
+  public locales = [{lc_codloc:0, lc_nomloc:'Todos'}];
+  public dataSP = [];
+  public datosPorComparar = {};
+  public cargandoDatos:boolean = false;
 
-  inicio:string;
-  termino:string;
-  vendedor:number;
-  local:number;
+  /* Parametros de busqueda */
+  public inicio:string;
+  public termino:string;
+  public vendedor:number;
+  public local:number;
+
+  /* Propiedades del grafico */
+  public barChartLabels: Label[] = [];
+  public barChartType: ChartType = 'horizontalBar';  /* bar */
+  public barChartLegend = true;
+  public barChartData: ChartDataSets[] = [
+    { borderWidth: 2, data: [], label: 'Monto Credito' },
+    { borderWidth: 2, data: [], label: 'Monto Venta' }
+  ];
+  /* backgroundColor: 'rgba(253, 203, 110,1.0)' */
+
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
 
   constructor(private serConsulta: ConsultasSPService) { }
 
   ngOnInit() {
-    /* carga tablas vendedores y locales */
+    /* Carga tablas vendedores y locales */
     this.serConsulta.consultaTablas().subscribe(data => {
-      
-      /* recorro el arreglo de vendedores que viene de data y por cada elemento lo agrego al array de la vista */
+      /* Recorro el arreglo de vendedores que viene de data y por cada elemento lo agrego al array de la vista */
       data['vendedores'].map(elem => this.vendedores.push(elem));
-      data['locales'].map(elem => this.locales.push(elem));
-
-      console.log(this.vendedores);
-      console.log(this.locales);
-      
+      data['locales'].map(elem => this.locales.push(elem)); 
     });
   }
 
   cargarGrafico(){
 
+    /* Inhabilito el boton de busqueda mientras se realiza la consulta*/
     this.cargandoDatos = true;
     
+    /* Jquery, debo cambiar esto para obtener los datos */
     this.inicio = $( "#inicio" ).val();
     this.termino = $( "#termino" ).val();
     this.vendedor = $( "#vendedor" ).val();
     this.local = $("#local").val();
-    
-    
-    this.serConsulta.consultaSP1076(this.inicio, this.termino, this.vendedor, this.local).subscribe(data => {
 
+    let parametros = {
+      ini: this.inicio,
+      ter: this.termino,
+      ven: this.vendedor,
+      loc: this.local
+    }
+    
+    this.serConsulta.consultaSP1076(parametros).subscribe(data => {
+
+      /* Cuando ya se carga la data el boton se activa */
       this.cargandoDatos = false;
       
-      /* lleno data con lo que me devuelve el SP */
+      /* Lleno dataSP con lo que me devuelve el SP */
       this.dataSP = data;
 
-      /* da vuelta el arreglo */
+      /* Da vuelta el arreglo */
       this.dataSP.reverse();
-      /* elimina el ultimo elemento y lo retorna */
-      this.mesPorComparar = this.dataSP.pop();
+
+      /* Elimina el ultimo elemento y lo retorna guardandolo en datosPorComparar*/
+      this.datosPorComparar = this.dataSP.pop();
       
-      /* volvemos a dar vuelta el arreglo */
+      /* Volvemos a dar vuelta el arreglo dejandolo en el orden que tenia */
       this.dataSP.reverse();
 
-      console.log(this.dataSP);
+      /* Creo 3 arreglos para el grafico */
+      let montoCredito =  [];
+      let montoVenta = [];
+      let meses = [];
 
-      const montoCredito =  [];
-      const montoVenta = [];
-      const meses = [];
-
+      /* Recorro la data llenando los 3 arreglos */
       this.dataSP.map(elem => {
 
         let periodo = '';
@@ -91,10 +118,12 @@ export class Sp1076Component implements OnInit {
           case 12: periodo = 'Diciembre '+elem.TM_ANOPER; break;
         }
 
+        
+
         meses.push(periodo);
         montoCredito.push(elem.TM_MTOCRE);
         montoVenta.push(elem.TM_MTOVTA);
-
+        
       });
       
       this.barChartLabels = meses;
@@ -104,27 +133,6 @@ export class Sp1076Component implements OnInit {
     });
 
   }
-
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-    scales: { xAxes: [{}], yAxes: [{}] },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      }
-    }
-  };
-
-  
-  public barChartLabels: Label[] = [];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-
-  public barChartData: ChartDataSets[] = [
-    { borderWidth: 2, data: [], label: 'Monto Credito' },
-    { borderWidth: 2, data: [], label: 'Monto Venta' }
-  ];
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {

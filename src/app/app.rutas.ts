@@ -3,6 +3,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { Sp1076Component } from './componentes/sp1076/sp1076.component';
+import { AutorizaNVComponent } from './componentes/autoriza-nv/autoriza-nv.component';
 
 
 
@@ -11,6 +12,7 @@ const RUTAS: Routes = [
     { path: 'usuario/registro', component: RegistroComponent },
     { path: 'usuario/login', component: LoginComponent },
     { path: 'consulta/sp1076', component: Sp1076Component },
+    { path: 'venta/autorizaNV', component: AutorizaNVComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'home' } //aqui ira el componente 404
 ];
 

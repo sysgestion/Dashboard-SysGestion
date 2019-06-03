@@ -4,7 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
 
+/* ngx-bootstrap */
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 import { APP_RUTAS } from './app.rutas';
 
@@ -37,7 +40,9 @@ import { AutorizaNVComponent } from './componentes/autoriza-nv/autoriza-nv.compo
     HttpClientModule,
     ChartsModule,
     FormsModule,
+    BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
+    AccordionModule.forRoot(),
     APP_RUTAS
   ],
   providers: [],

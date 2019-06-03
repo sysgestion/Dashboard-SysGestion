@@ -12,4 +12,12 @@ export class AutorizaNVComponent implements OnInit {
   ngOnInit() {
   }
 
+  rechazarNV(){
+    console.log('rechazada');
+  }
+
+  aceptarNV(){
+    console.log('aceptada');
+  }
+
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VentasService } from 'src/app/servicios/ventas.service';
 
 @Component({
   selector: 'app-autoriza-nv',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AutorizaNVComponent implements OnInit {
 
-  constructor() { }
+  loading:boolean;
+  clientes = [];
+
+  constructor(private serVentas: VentasService) { 
+    this.loading = true;
+  }
 
   ngOnInit() {
+    this.serVentas.getClientes(1).subscribe(data => {
+      console.log(data);
+      this.clientes = data;
+
+      this.loading = false;
+    });
   }
 
   rechazarNV(){

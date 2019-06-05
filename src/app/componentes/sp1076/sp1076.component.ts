@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConsultasSPService } from '../../servicios/consultasSP.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import * as pluginAnnotation from 'chartjs-plugin-annotation';
 
 declare let jQuery:any;
 declare let $:any;
@@ -13,6 +14,7 @@ declare let $:any;
 })
 export class Sp1076Component implements OnInit {
 
+  public loading:boolean;
   public tamano:number = 15;
   public vendedores = [{ve_codven:0, ve_nomven:'Todos'}];
   public locales = [{lc_codloc:0, lc_nomloc:'Todos'}];
@@ -28,26 +30,46 @@ export class Sp1076Component implements OnInit {
 
   /* Propiedades del grafico */
   public barChartLabels: Label[] = [];
-  public barChartType: ChartType = 'horizontalBar';  /* bar */
+  public barChartType: ChartType = 'line';  /* bar */
   public barChartLegend = true;
+  public barChartPlugins = [pluginAnnotation];
   public barChartData: ChartDataSets[] = [
     { borderWidth: 2, data: [], label: 'Monto Credito' },
     { borderWidth: 2, data: [], label: 'Monto Venta' }
   ];
-  /* backgroundColor: 'rgba(253, 203, 110,1.0)' */
 
-  public barChartOptions: ChartOptions = {
+  public barChartOptions: (ChartOptions & {annotation:any}) = {
     responsive: true,
-    scales: { xAxes: [{}], yAxes: [{}] },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      }
+    scales: { 
+      xAxes: [{
+        id:'x-axis-0'
+      }], 
+      yAxes: [{
+        id:'y-axis-0',
+        position: 'left'
+      }]
+    },
+    annotation : {
+      annotations: [{
+        type: 'line',
+        mode: 'horizontal',
+        scaleID: 'y-axis-0',
+        value: 0,
+        borderColor: 'orange',
+        borderWidth : 2,
+        label : {
+          fontSize: 11,
+          position: 'center',
+          enabled: false,
+          content: ''
+        } 
+      }]
     }
   };
 
-  constructor(private serConsulta: ConsultasSPService) { }
+  constructor(private serConsulta: ConsultasSPService) { 
+    this.loading = true;
+  }
 
   ngOnInit() {
     /* Carga tablas vendedores y locales */
@@ -55,6 +77,8 @@ export class Sp1076Component implements OnInit {
       /* Recorro el arreglo de vendedores que viene de data y por cada elemento lo agrego al array de la vista */
       data['vendedores'].map(elem => this.vendedores.push(elem));
       data['locales'].map(elem => this.locales.push(elem)); 
+
+      this.loading = false;
     });
   }
 
@@ -77,16 +101,16 @@ export class Sp1076Component implements OnInit {
     }
     
     this.serConsulta.consultaSP1076(parametros).subscribe(data => {
-
+      
       /* Cuando ya se carga la data el boton se activa */
       this.cargandoDatos = false;
       
       /* Lleno dataSP con lo que me devuelve el SP */
       this.dataSP = data;
-
+      
       /* Da vuelta el arreglo */
       this.dataSP.reverse();
-
+      
       /* Elimina el ultimo elemento y lo retorna guardandolo en datosPorComparar*/
       this.datosPorComparar = this.dataSP.pop();
       
@@ -118,8 +142,6 @@ export class Sp1076Component implements OnInit {
           case 12: periodo = 'Diciembre '+elem.TM_ANOPER; break;
         }
 
-        
-
         meses.push(periodo);
         montoCredito.push(elem.TM_MTOCRE);
         montoVenta.push(elem.TM_MTOVTA);
@@ -129,9 +151,13 @@ export class Sp1076Component implements OnInit {
       this.barChartLabels = meses;
       this.barChartData[0].data = montoCredito;
       this.barChartData[1].data = montoVenta;
+      this.barChartOptions.annotation.annotations[0].value = this.datosPorComparar['TM_MTOVTA'];
+
+      let montoVentaLabel = ("$ "+ this.datosPorComparar['TM_MTOVTA']).replace(/(\d+)(\d{3})(\d{3})$/ ,"$1.$2.$3").replace(/(\d+)(\d{3})$/ ,"$1.$2");
+      this.barChartOptions.annotation.annotations[0].label.content = 'Venta '+ montoVentaLabel;
+      this.barChartOptions.annotation.annotations[0].label.enabled = true;
       
     });
-
   }
 
   // events

@@ -21,6 +21,7 @@ import { Sp1076Component } from './componentes/sp1076/sp1076.component';
 import { GetMesPipe } from './pipes/get-mes.pipe';
 import { MonedaChilenaPipe } from './pipes/moneda-chilena.pipe';
 import { AutorizaNVComponent } from './componentes/autoriza-nv/autoriza-nv.component';
+import { LoadingComponent } from './componentes/compartido/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AutorizaNVComponent } from './componentes/autoriza-nv/autoriza-nv.compo
     Sp1076Component,
     GetMesPipe,
     MonedaChilenaPipe,
-    AutorizaNVComponent
+    AutorizaNVComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

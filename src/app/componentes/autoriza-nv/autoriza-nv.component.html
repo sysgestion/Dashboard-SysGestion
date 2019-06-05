@@ -1,8 +1,10 @@
-<h2 class="animated fast fadeIn mb-3">
+<app-loading *ngIf="loading"></app-loading>
+
+<h2 class="animated fast fadeIn mb-3" *ngIf="!loading">
     Autoriza Notas De Venta
 </h2>
 
-<div class="animated fadeIn">
+<div class="animated fadeIn" *ngIf="!loading">
     <accordion [isAnimated]="true">
         <accordion-group>
             <button class="btn btn-link clearfix" accordion-heading>

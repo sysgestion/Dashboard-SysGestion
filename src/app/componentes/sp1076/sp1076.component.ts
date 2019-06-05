@@ -69,18 +69,18 @@ export class Sp1076Component implements OnInit {
 
   constructor(private serConsulta: ConsultasSPService) { 
     this.loading = true;
-  }
 
-  ngOnInit() {
     /* Carga tablas vendedores y locales */
     this.serConsulta.consultaTablas().subscribe(data => {
       /* Recorro el arreglo de vendedores que viene de data y por cada elemento lo agrego al array de la vista */
       data['vendedores'].map(elem => this.vendedores.push(elem));
       data['locales'].map(elem => this.locales.push(elem)); 
-
+  
       this.loading = false;
     });
   }
+
+  ngOnInit() { }
 
   cargarGrafico(){
 

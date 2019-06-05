@@ -17,10 +17,10 @@ export class VentasService {
     
     params = params.append('fecini', activos.toString());
     
-    return this.http.get(`https://dashboard-sysgestion.herokuapp.com/clientes`, {headers:headers, params: params})
-    .pipe(map(data => {
+    return this.http.get(`https://dashboard-sysgestion.herokuapp.com/clientes`, {headers:headers, params: params});
+    /* .pipe(map(data => {
       return data['data'];
-    }));
+    })); */
   }
 
 

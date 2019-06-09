@@ -1,36 +1,22 @@
 <app-loading *ngIf="loading"></app-loading>
 
-<h2 class="animated fast fadeIn mb-3" *ngIf="!loading">
-    Autoriza Notas De Venta
-</h2>
 
-<div class="animated fadeIn" *ngIf="!loading">
-    <accordion [isAnimated]="true">
-        <accordion-group>
-            <button class="btn btn-link clearfix" accordion-heading>
-                <div class="pull-left float-left text-left">
-                    Folio: 24232
-                </div>
-            </button>
-            <button (click)="rechazarNV()" class="btn btn-danger float-right ml-1" accordion-heading>
-                Rechazar
-            </button>
-            <button (click)="aceptarNV()" class="btn btn-success float-right" accordion-heading>
-                Aceptar
-            </button>
-            <p>Cliente: Razon Social</p>
-            <p>Fecha Emisión: 15 de Abril de 2019</p>
-            <p>Vendedor: Marianela Cespedes</p>
-            <p>Aquí irá el detalle de la NV</p>
-        </accordion-group>
-        <accordion-group heading="Another group">
-            <p>Some content</p>
-        </accordion-group>
-        <accordion-group heading="Another group">
-            <p>Some content</p>
-        </accordion-group>
-        <accordion-group heading="Another group">
-            <p>Some content</p>
-        </accordion-group>
-    </accordion>
+<div *ngIf="!loading">
+
+    <div class="row animated fadeIn">
+        <div class="col-sm-12">
+        <section class="panel">
+            <div class="panel-body">
+            <h4>
+                <i class="fas fa-check-circle"></i>
+                Autorización de Nota de Venta
+            </h4>
+            <hr>
+    
+    
+            </div>
+        </section>
+        </div>
+    </div>
+    
 </div>

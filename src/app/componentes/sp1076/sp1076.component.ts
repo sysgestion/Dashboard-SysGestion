@@ -15,7 +15,7 @@ declare let $:any;
 export class Sp1076Component implements OnInit {
 
   public loading:boolean;
-  public tamano:number = 15;
+  public tamano:number = 12;
   public vendedores = [{ve_codven:0, ve_nomven:'Todos'}];
   public locales = [{lc_codloc:0, lc_nomloc:'Todos'}];
   public dataSP = [];

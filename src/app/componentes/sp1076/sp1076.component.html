@@ -1,115 +1,144 @@
 <app-loading *ngIf="loading"></app-loading>
 
-<h2 class="animated fast fadeIn" *ngIf="!loading">
-    Consuta sp 1076
-</h2>
 
 <div *ngIf="!loading">
 
-  <!-- filtros -->
-  <div class="lead animated fadeIn">
-    <form (ngSubmit)="cargarGrafico()" #forma="ngForm">
-        <div class="form-row">
-          <div class="col form-group">
-            <label class="my-1 mr-2" for="inicio">Inicio</label>
-            <!-- debo quitar el type cuando funcione el css con la mediaquery -->
-            <input [(ngModel)]="inicio" name="inicio" type="date" class="form-control form-control-sm" id="inicio" placeholder="Inicio" required>
-            <label class="my-1 mr-2" for="vendedor">Vendedor</label>
-            <select class="form-control form-control-sm" id="vendedor">
-              <option *ngFor="let i of vendedores" [value]="i.ve_codven">{{i.ve_codven + " - " + i.ve_nomven | titlecase}}</option>
-            </select>
-          </div>
-          <div class="col">
-              <label class="my-1 mr-2" for="termino">Termino</label>
-              <input [(ngModel)]="termino" name="termino" type="date" class="form-control form-control-sm" id="termino" placeholder="Termino" required>
-              <label class="my-1 mr-2" for="local">Local</label>
-              <select class="form-control form-control-sm" id="local">
-                <option *ngFor="let i of locales;" [value]="i.lc_codloc">{{i.lc_codloc + " - " + i.lc_nomloc | titlecase }}</option>
-              </select>
-          </div>
-        </div>
-        <button [disabled]="!forma.valid || cargandoDatos" type="submit" class="mt-3 btn btn-outline-primary">
-          <span *ngIf="!cargandoDatos">Buscar</span>
-          <span *ngIf="cargandoDatos"><i class="fas fa-spinner fa-spin mr-2"></i>Cargando Datos</span>
-        </button>
-        
-    
-        <h2 class="mt-4">
-          Resultado por Comparar
-        </h2>
-        <div class="row">
-          <div class="col">
-            <div class="alert alert-info" role="alert" *ngIf="dataSP.length > 0">
-              <b>{{ datosPorComparar.TM_MESPER | getMes}} / {{datosPorComparar.TM_ANOPER }}</b>
-              Venta: <b>{{ datosPorComparar.TM_MTOVTA | monedaChilena}} </b>
-              Credito: <b>{{ datosPorComparar.TM_MTOCRE | monedaChilena}}</b>
-              Saldo: <b>{{ datosPorComparar.TM_MTOVTA - datosPorComparar.TM_MTOCRE | monedaChilena}}</b>
-            </div>
-          </div>
-        </div>
-      
-    </form>
-  </div>
+  <div class="row animated fadeIn">
+    <div class="col-sm-12">
+      <section class="panel">
+        <div class="panel-body">
+          <h4>
+            <i class="fas fa-balance-scale"></i>
+            Comparativa de Ventas últimos 12 meses
+          </h4>
+          <hr>
 
-  <div class="animated fadeIn mb-2">
-    <div class="btn-group" role="group" aria-label="forma grafico">
-      <button type="button" class="btn-sm btn btn-outline-primary" (click)="barChartType = 'line'">Lineas</button>
-      <button type="button" class="btn-sm btn btn-outline-primary" (click)="barChartType = 'bar'">Barras</button>
+          <form (ngSubmit)="cargarGrafico()" #forma="ngForm">
+              <div class="form-row">
+                <div class="col form-group">
+                  <label class="my-1 mr-2" for="inicio">Inicio</label>
+                  <!-- debo quitar el type cuando funcione el css con la mediaquery -->
+                  <input [(ngModel)]="inicio" name="inicio" type="date" class="form-control form-control-sm" id="inicio" placeholder="Inicio" required>
+                  <label class="my-1 mr-2" for="vendedor">Vendedor</label>
+                  <select class="form-control form-control-sm" id="vendedor">
+                    <option *ngFor="let i of vendedores" [value]="i.ve_codven">{{i.ve_codven + " - " + i.ve_nomven | titlecase}}</option>
+                  </select>
+                </div>
+                <div class="col">
+                    <label class="my-1 mr-2" for="termino">Termino</label>
+                    <input [(ngModel)]="termino" name="termino" type="date" class="form-control form-control-sm" id="termino" placeholder="Termino" required>
+                    <label class="my-1 mr-2" for="local">Local</label>
+                    <select class="form-control form-control-sm" id="local">
+                      <option *ngFor="let i of locales;" [value]="i.lc_codloc">{{i.lc_codloc + " - " + i.lc_nomloc | titlecase }}</option>
+                    </select>
+                </div>
+              </div>
+              <button [disabled]="!forma.valid || cargandoDatos" type="submit" class="mt-3 btn btn-sm btn-outline-primary">
+                <span *ngIf="!cargandoDatos">Buscar</span>
+                <span *ngIf="cargandoDatos"><i class="fas fa-spinner fa-spin mr-2"></i>Cargando Datos</span>
+              </button>
+              
+          
+              <div class="row" *ngIf="dataSP.length > 0">
+                <div class="col">
+                  <h4 class="mt-4">
+                    <i class="fas fa-eye"></i>
+                    Resultado por Comparar
+                  </h4>
+                  <div class="alert alert-info" role="alert">
+                    <b>{{ datosPorComparar.TM_MESPER | getMes}} / {{datosPorComparar.TM_ANOPER }}</b>
+                    Venta: <b>{{ datosPorComparar.TM_MTOVTA | monedaChilena}} </b>
+                    Credito: <b>{{ datosPorComparar.TM_MTOCRE | monedaChilena}}</b>
+                    Saldo: <b>{{ datosPorComparar.TM_MTOVTA - datosPorComparar.TM_MTOCRE | monedaChilena}}</b>
+                  </div>
+                </div>
+              </div>
+            
+          </form>
+
+        </div>
+      </section>
     </div>
   </div>
 
   <!-- grafico -->
-  <div class="lead animated fadeIn">
-    <div style="display: block">
-      <canvas baseChart
-        [(datasets)]="barChartData"
-        [(labels)]="barChartLabels"
-        [(options)]="barChartOptions"
-        [(plugins)]="barChartPlugins"
-        [(legend)]="barChartLegend"
-        [(chartType)]="barChartType">
-      </canvas>
+  <div class="row animated fadeIn">
+    <div class="col-sm-12">
+        <section class="panel">
+          <div class="panel-body">
+            <h4 class="d-inline">
+              <i class="fas fa-chart-area"></i>
+              Últimos 12 meses
+            </h4>
+            <div class="btn-group d-inline float-right" role="group" aria-label="forma grafico">
+              <button type="button" class="btn-sm btn btn-outline-primary" (click)="barChartType = 'line'">Lineas</button>
+              <button type="button" class="btn-sm btn btn-outline-primary" (click)="barChartType = 'bar'">Barras</button>
+            </div>
+            <hr>
+
+            <div style="display: block">
+              <canvas baseChart
+                [(datasets)]="barChartData"
+                [(labels)]="barChartLabels"
+                [(options)]="barChartOptions"
+                [(plugins)]="barChartPlugins"
+                [(legend)]="barChartLegend"
+                [(chartType)]="barChartType">
+              </canvas>
+            </div>
+
+          </div>
+        </section>
     </div>
   </div>
 
-  <div class="mt-4 mb-2 lead animated fadeIn">
-    <h2 class="mb-1">
-      Tabla
-    </h2>
-    <button type="button" class="btn btn-outline-primary mr-1" [disabled]="tamano === 40" (click)="tamano = tamano + 5">
-      <i class="fa fa-plus"></i>
-    </button>
-    <button type="button" class="btn btn-outline-primary" [disabled]="tamano === 5" (click)="tamano = tamano - 5">
-      <i class="fa fa-minus"></i>
-    </button>
+  <!-- tabla -->
+  <div class="row animated fadeIn">
+    <div class="col-sm-12">
+      <section class="panel">
+        <div class="panel-body">
+          <h4 class="d-inline">
+            <i class="fas fa-table"></i>
+            Tabla
+          </h4>
+          <div class="d-inline float-right">
+            <button type="button" class="btn btn-sm btn-outline-primary mr-1" [disabled]="tamano === 27" (click)="tamano = tamano + 3">
+              <i class="fa fa-plus"></i>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-primary" [disabled]="tamano === 6" (click)="tamano = tamano - 3">
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+          <hr>
 
-  </div>
+          <div class="table-responsive">
+            <table class="table table-sm table-hover table-bordered">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col" class=""><span class="ml-2">Mes</span></th>
+                  <th scope="col"><span class="ml-2">Año</span></th>
+                  <th scope="col" class="text-right"><span class="mr-2">Venta</span></th>
+                  <th scope="col" class="text-right"><span class="mr-2">Credito</span></th>
+                  <th scope="col" class="text-right"><span class="mr-2">Saldo</span></th>
+                </tr>
+              </thead>
+              <tbody [style.fontSize.px]="tamano">
+                <tr *ngFor="let i of dataSP">
+                  <th><span class="ml-2">{{i.TM_MESPER | getMes}}</span></th> 
+                  <td><span class="ml-2">{{i.TM_ANOPER}}</span></td>
+                  <td class="text-right" *ngIf="i.TM_MTOVTA > 0"><span class="mr-2">{{i.TM_MTOVTA | monedaChilena}}</span></td>
+                  <td *ngIf="i.TM_MTOVTA <= 0"></td>
+                  <td class="text-right" *ngIf="i.TM_MTOCRE > 0"><span class="mr-2">{{i.TM_MTOCRE | monedaChilena}}</span></td>
+                  <td *ngIf="i.TM_MTOCRE <= 0"></td>
+                  <td class="text-right"><span class="mr-2">{{i.TM_MTOVTA - i.TM_MTOCRE | monedaChilena}}</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-  <div class="lead animated fadeIn">
-      <div class="table-responsive">
-        <table class="table table-sm table-hover table-bordered">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col" class=""><span class="ml-2">Mes</span></th>
-              <th scope="col"><span class="ml-2">Año</span></th>
-              <th scope="col" class="text-right"><span class="mr-2">Venta</span></th>
-              <th scope="col" class="text-right"><span class="mr-2">Credito</span></th>
-              <th scope="col" class="text-right"><span class="mr-2">Saldo</span></th>
-            </tr>
-          </thead>
-          <tbody [style.fontSize.px]="tamano">
-            <tr *ngFor="let i of dataSP">
-              <th><span class="ml-2">{{i.TM_MESPER | getMes}}</span></th> 
-              <td><span class="ml-2">{{i.TM_ANOPER}}</span></td>
-              <td class="text-right" *ngIf="i.TM_MTOVTA > 0"><span class="mr-2">{{i.TM_MTOVTA | monedaChilena}}</span></td>
-              <td *ngIf="i.TM_MTOVTA <= 0"></td>
-              <td class="text-right" *ngIf="i.TM_MTOCRE > 0"><span class="mr-2">{{i.TM_MTOCRE | monedaChilena}}</span></td>
-              <td *ngIf="i.TM_MTOCRE <= 0"></td>
-              <td class="text-right"><span class="mr-2">{{i.TM_MTOVTA - i.TM_MTOCRE | monedaChilena}}</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        </div>
+      </section>
+    </div>
   </div>
 
 </div>

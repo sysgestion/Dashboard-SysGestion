@@ -9,7 +9,12 @@
         </div>
 
         <ul class="list-unstyled components">
-            <p>Tablas / Graficos</p>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="['home']">
+                    <span class="icono"><i class="fas fa-home"></i></span>
+                    Dashboard
+                </a>
+            </li>
             <li>
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                   <span class="icono"><i class="fas fa-briefcase"></i></span>
@@ -70,11 +75,8 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
 
-              
               <button type="button" id="sidebarCollapse" class="navbar-btn">
-                <span></span>
-                <span></span>
-                <span></span>
+                <i class="fa fa-bars"></i>
               </button>
               <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-align-justify"></i>
@@ -85,14 +87,6 @@
               </a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item" routerLinkActive="active">
-                            <a class="nav-link" [routerLink]="['home']">
-                              <span><i class="fas fa-home"></i></span>
-                              Home
-                            </a>
-                        </li>
-                    </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item" *ngIf="!isLogeado" routerLinkActive="active">
                             <a class="nav-link" [routerLink]="['usuario', 'registro']">Registro</a>

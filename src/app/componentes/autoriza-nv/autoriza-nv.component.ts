@@ -22,34 +22,17 @@ export class AutorizaNVComponent implements OnInit {
       /* Recorro el arreglo de vendedores que viene de data y por cada elemento lo agrego al array de la vista */
       data['vendedores'].map(elem => this.vendedores.push(elem));
       data['locales'].map(elem => this.locales.push(elem));
-      console.log(this.vendedores);
-      console.log(this.locales);
+      this.loading = false;
 
-      this,serVentas.getClientes(1).subscribe(data => {
+      /* this,serVentas.getClientes(1).subscribe(data => {
         data['data'].map(elem => this.clientes.push(elem));
         console.log(this.clientes);
         this.loading = false;
-      });
+      }); */
     });
   
   }
   
-  ngOnInit() { 
-    /* this.serVentas.getClientes(1).subscribe(data => {
-      console.log(data);
-      
-      data['data'].map(elem => this.clientes.push(elem));
-      console.log(this.clientes);
-      this.loading = false;
-    }); */
-  }
-
-  rechazarNV(){
-    console.log('rechazada');
-  }
-
-  aceptarNV(){
-    console.log('aceptada');
-  }
+  ngOnInit() {}
 
 }

@@ -35,6 +35,7 @@ html {
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
 }
+
 body {
     color: #767676;
     background: #f1f2f7;
@@ -44,6 +45,7 @@ body {
     font-size: 15px;
     text-rendering: optimizeLegibility;
 }
+
 .panel {
     margin-bottom: 15px;
     background-color: #fff;
@@ -52,28 +54,19 @@ body {
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
+
 .panel-body {
     padding: 15px;
 }
 
-.form-horizontal.bucket-form .form-group {
-    border-bottom: 1px solid #eff2f7;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-}
-
-.form-horizontal .form-group {
-    margin-right: -15px;
-    margin-left: -15px;
-}
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-horizontal.bucket-form .form-group .help-block {
-    margin-bottom: 0;
-}
-
 input[type="text"], textarea, select {
     color: black !important;
+}
+
+.sidebar-toggle-box .fa-bars {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    padding: 8px 8px 8px 9px;
+    color: rgba(0,0,0,.3);
 }

@@ -23,5 +23,16 @@ export class VentasService {
     })); */
   }
 
+  getNotaVenta( folio ) {
+    let headers = this._headers.append('Content-Type', 'application/json');
+    
+    let params = new HttpParams();
+    
+    params = params.append('folio', folio.toString());
+    
+    return this.http.get(`https://dashboard-sysgestion.herokuapp.com/notaventa`, {headers:headers, params: params});
+   
+  }
+
 
 }

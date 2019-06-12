@@ -12,8 +12,39 @@
                 Autorización de Nota de Venta
             </h4>
             <hr>
-    
-    
+
+            <div class="row text-center mb-3">
+                <div class="col-lg-6 mb-2">
+                    <input class="form-control" type="text" placeholder="Folio Nota de Venta" #folio>
+                </div>
+                <div class="col-lg-6 ">
+                    <button [disabled]="buscando" type="button" class="btn btn-success btn-block" (click)="buscarNotaVenta(folio.value)">
+                            <span *ngIf="!buscando">Buscar NV</span>
+                            <span *ngIf="buscando"><i class="fas fa-sync-alt fa-spin mr-2"></i>Buscando</span>
+                    </button>
+                </div>
+            </div>
+
+            <div [ngClass]="{'alert-info':buscando, 'alert-warning':!buscando}" class="alert col-lg-12 text-center" role="alert">
+                <p style="font-size: 20px"><strong>Busca una nota de venta</strong></p>
+                <h2>
+                    <span *ngIf="!buscando"><i class="fas fa-pencil-alt"></i></span>
+                    <span *ngIf="buscando"><i class="fas fa-sync-alt fa-spin"></i></span>
+                </h2>
+                <p>Necesitas indicar el folio de la nota de venta a buscar</p>
+            </div>
+
+            <div class="table-responsive">
+                    <table class="table table-sm table-hover table-bordered">
+                      <tbody>
+                        <tr *ngFor="let i of dataSpNotaVenta">
+                          <td><span class="ml-2">{{i.LN_DESART}}</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+
             </div>
         </section>
         </div>

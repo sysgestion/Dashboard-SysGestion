@@ -9,6 +9,7 @@ import { ConsultasSPService } from 'src/app/servicios/consultasSP.service';
 })
 export class AutorizaNVComponent implements OnInit {
 
+  public existe:boolean = true;
   public loading:boolean;
   public buscando:boolean;
   public vendedores = [{ve_codven:0, ve_nomven:'Todos'}];
@@ -41,13 +42,21 @@ export class AutorizaNVComponent implements OnInit {
     this.buscando = true;
     
     this.serVentas.getNotaVenta(folio).subscribe(data => {
-      console.log(data);
-      
-      data['data'].map(elem => this.dataSpNotaVenta.push(elem));
-      console.log(this.dataSpNotaVenta);
-      this.buscando = false;
-      
+      if(data['message'] === 'DOC_NO_EXISTE'){
+        this.dataSpNotaVenta = [];
+        this.existe = false;
+        this.buscando = false;
+      }else{
+        this.dataSpNotaVenta = data['data'];
+        this.buscando = false;
+        this.existe = true;
+      }
     });
+  }
+
+  autorizar(value){
+    console.log(parseInt(value));
+    
   }
 
 }

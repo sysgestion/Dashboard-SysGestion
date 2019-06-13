@@ -30,8 +30,8 @@ export class VentasService {
     
     params = params.append('folio', folio.toString());
     
+    //return this.http.get(`http://localhost:3000/notaventa`, {headers:headers, params: params});
     return this.http.get(`https://dashboard-sysgestion.herokuapp.com/notaventa`, {headers:headers, params: params});
-   
   }
 
 

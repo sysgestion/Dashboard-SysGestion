@@ -12,10 +12,13 @@ export class AutorizaNVComponent implements OnInit {
   public existe:boolean = true;
   public loading:boolean;
   public buscando:boolean;
+  public autorizado: boolean;
+  public msjAutorizado: boolean;
   public vendedores = [{ve_codven:0, ve_nomven:'Todos'}];
   public locales = [{lc_codloc:0, lc_nomloc:'Todos'}];
   public clientes = [];
   public dataSpNotaVenta = [];
+  public montoTotalDocumento:number = 0;
 
   constructor(private serVentas: VentasService, private serConsulta: ConsultasSPService) { 
     //this.loading = true;
@@ -47,6 +50,8 @@ export class AutorizaNVComponent implements OnInit {
         this.existe = false;
         this.buscando = false;
       }else{
+        this.montoTotalDocumento = 0;
+        data['data'].map(elem => this.montoTotalDocumento += (parseInt(elem['LN_CANART']) * parseInt(elem['LN_VALUNI'])));
         this.dataSpNotaVenta = data['data'];
         this.buscando = false;
         this.existe = true;
@@ -54,9 +59,28 @@ export class AutorizaNVComponent implements OnInit {
     });
   }
 
-  autorizar(value){
-    console.log(parseInt(value));
-    
+  autorizar(estado){
+    this.serVentas.autorizaNV(estado, this.dataSpNotaVenta[0]['en_numnot']).subscribe(data => {
+      if(data['estado'] === 1){
+        this.dataSpNotaVenta = [];
+        this.buscando = false;
+        this.montoTotalDocumento = 0;
+        this.msjAutorizado = true;
+        this.autorizado = true;
+        setTimeout(() => {
+          this.msjAutorizado = false;
+        }, 2000);
+      }else{
+        this.dataSpNotaVenta = [];
+        this.buscando = false;
+        this.montoTotalDocumento = 0;
+        this.msjAutorizado = true;
+        this.autorizado = false;
+        setTimeout(() => {
+          this.msjAutorizado = false;
+        }, 2000);
+      }
+    });
   }
 
 }

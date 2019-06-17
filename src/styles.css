@@ -70,3 +70,104 @@ input[type="text"], textarea, select {
     padding: 8px 8px 8px 9px;
     color: rgba(0,0,0,.3);
 }
+
+
+
+
+
+
+
+
+
+/* reset bootstrap */
+/*button*/
+
+/* .btn-default {
+    background-color: #c7cbd6;
+    border-color: #c7cbd6;
+    color: #fff;
+}
+
+.btn-default.disabled {
+    color: #515151;
+    background-color: #dde1ed;
+    border-color: #dde1ed;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+    background-color: #b0b5b9;
+    border-color: #b0b5b9;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #1fb5ad;
+    border-color: #1fb5ad;
+    color: #FFFFFF;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+    background-color: #1ca59e;
+    border-color: #1ca59e;
+    color: #FFFFFF;
+}
+
+.btn-success {
+    background-color: #95b75d;
+    border-color: #95b75d;
+    color: #FFFFFF;
+}
+
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+    background-color: #88a755;
+    border-color: #88a755;
+    color: #FFFFFF;
+}
+
+.btn-info {
+    background-color: #57c8f1;
+    border-color: #57c8f1;
+    color: #FFFFFF;
+}
+
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
+    background-color: #53bee6;
+    border-color: #53BEE6;
+    color: #FFFFFF;
+}
+
+.btn-warning {
+    background-color: #f3c022;
+    border-color: #f3c022;
+    color: #FFFFFF;
+}
+
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open .dropdown-toggle.btn-warning {
+    background-color: #e4ba00;
+    border-color: #e4ba00;
+    color: #FFFFFF;
+}
+
+.btn-danger {
+    background-color: #fa8564;
+    border-color: #fa8564;
+    color: #FFFFFF;
+}
+
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
+    background-color: #ec6459;
+    border-color: #ec6459;
+    color: #FFFFFF;
+}
+
+
+.btn-white {
+    box-shadow: none !important;
+} */
+
+/*Rounded Button*/
+
+/* .btn-round {
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+} */

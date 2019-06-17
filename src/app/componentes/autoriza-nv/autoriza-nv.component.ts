@@ -10,10 +10,12 @@ import { ConsultasSPService } from 'src/app/servicios/consultasSP.service';
 export class AutorizaNVComponent implements OnInit {
 
   public existe:boolean = true;
+  public estadoDoc: string;
   public loading:boolean;
   public buscando:boolean;
   public autorizado: boolean;
   public msjAutorizado: boolean;
+  public msjEstado: boolean;
   public vendedores = [{ve_codven:0, ve_nomven:'Todos'}];
   public locales = [{lc_codloc:0, lc_nomloc:'Todos'}];
   public clientes = [];
@@ -49,12 +51,26 @@ export class AutorizaNVComponent implements OnInit {
         this.dataSpNotaVenta = [];
         this.existe = false;
         this.buscando = false;
+        setTimeout(() => {
+          this.existe = true;
+        }, 2000);
       }else{
         this.montoTotalDocumento = 0;
         data['data'].map(elem => this.montoTotalDocumento += (parseInt(elem['LN_CANART']) * parseInt(elem['LN_VALUNI'])));
         this.dataSpNotaVenta = data['data'];
         this.buscando = false;
         this.existe = true;
+        switch (data['data'][0]['Estado']) {
+          case 'CERRADA': this.estadoDoc = 'El Documento esta Cerrado'; break;
+          case 'NULA': this.estadoDoc = 'El Documento esta Nulo'; break;
+          case 'RECHAZADA': this.estadoDoc = 'El Documento ya ha sido Rechazado'; break;
+          default : this.estadoDoc = 'Puedes Autorizar el Documento'; break;
+        }
+        
+        this.msjEstado = true;
+        setTimeout(() => {
+          this.msjEstado = false;
+        }, 2000);
       }
     });
   }

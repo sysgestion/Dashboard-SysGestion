@@ -27,15 +27,14 @@ export class Sp1076Component implements OnInit {
   public termino:string;
   public vendedor:number;
   public local:number;
-
+   
   /* Propiedades del grafico */
   public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'line';  /* bar */
   public barChartLegend = true;
   public barChartPlugins = [pluginAnnotation];
   public barChartData: ChartDataSets[] = [
-    { borderWidth: 2, data: [], label: 'Monto Credito' },
-    { borderWidth: 2, data: [], label: 'Monto Venta' }
+    { backgroundColor: '#57c8f1', borderColor: '#1fb5ad', borderWidth: 2, data: [], label: 'Monto Venta' }
   ];
 
   public barChartOptions: (ChartOptions & {annotation:any}) = {
@@ -70,13 +69,17 @@ export class Sp1076Component implements OnInit {
   constructor(private serConsulta: ConsultasSPService) { 
     this.loading = true;
 
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
+
     /* Carga tablas vendedores y locales */
     this.serConsulta.consultaTablas().subscribe(data => {
       /* Recorro el arreglo de vendedores que viene de data y por cada elemento lo agrego al array de la vista */
       data['vendedores'].map(elem => this.vendedores.push(elem));
       data['locales'].map(elem => this.locales.push(elem)); 
   
-      this.loading = false;
+      /* this.loading = false; */
     });
   }
 
@@ -118,8 +121,8 @@ export class Sp1076Component implements OnInit {
       this.dataSP.reverse();
 
       /* Creo 3 arreglos para el grafico */
-      let montoCredito =  [];
-      let montoVenta = [];
+      //let montoCredito =  [];
+      let montoSaldo = [];
       let meses = [];
 
       /* Recorro la data llenando los 3 arreglos */
@@ -143,17 +146,18 @@ export class Sp1076Component implements OnInit {
         }
 
         meses.push(periodo);
-        montoCredito.push(elem.TM_MTOCRE);
-        montoVenta.push(elem.TM_MTOVTA);
+        //montoCredito.push(elem.TM_MTOCRE);
+        montoSaldo.push(elem.TM_MTOVTA - elem.TM_MTOCRE);
         
       });
       
       this.barChartLabels = meses;
-      this.barChartData[0].data = montoCredito;
-      this.barChartData[1].data = montoVenta;
-      this.barChartOptions.annotation.annotations[0].value = this.datosPorComparar['TM_MTOVTA'];
+      //this.barChartData[0].data = montoCredito;
+      this.barChartData[0].data = montoSaldo;
+      let saldoLabel = this.datosPorComparar['TM_MTOVTA'] - this.datosPorComparar['TM_MTOCRE'];
 
-      let montoVentaLabel = ("$ "+ this.datosPorComparar['TM_MTOVTA']).replace(/(\d+)(\d{3})(\d{3})$/ ,"$1.$2.$3").replace(/(\d+)(\d{3})$/ ,"$1.$2");
+      this.barChartOptions.annotation.annotations[0].value = saldoLabel;
+      let montoVentaLabel = ("$ "+ saldoLabel).replace(/(\d+)(\d{3})(\d{3})$/ ,"$1.$2.$3").replace(/(\d+)(\d{3})$/ ,"$1.$2");
       this.barChartOptions.annotation.annotations[0].label.content = 'Venta '+ montoVentaLabel;
       this.barChartOptions.annotation.annotations[0].label.enabled = true;
       

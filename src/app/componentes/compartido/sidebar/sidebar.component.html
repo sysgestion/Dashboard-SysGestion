@@ -1,0 +1,68 @@
+<!-- Sidebar Holder -->
+<nav id="sidebar">
+
+        <div class="sidebar-header h3">
+            <img src="../assets/logoIcono.ico" width="30" height="30" class="imgLogo d-inline-block align-top" alt="">
+            Dashboard
+        </div>
+
+        <ul class="list-unstyled components">
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="['home']">
+                    <span class="icono"><i class="fas fa-home"></i></span>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                  <span class="icono"><i class="fas fa-briefcase"></i></span>
+                  Consultas
+                </a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['consulta', 'sp1076']">SP 1076</a>
+                    </li>
+                    <!-- <li>
+                        <a href="#">SP 1080</a>
+                    </li> -->
+                </ul>
+            </li>
+            <li>
+                <!-- <a href="#">
+                  <span class="icono"><i class="fas fa-chart-pie"></i></span>
+                  Rankings
+                </a> -->
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <span class="icono"><i class="fas fa-chart-bar"></i></span>
+                  Ventas
+                </a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['venta', 'autorizaNV']">Autorización N. Venta</a>
+                    </li>
+                    <li>
+                        <a href="#">Por Producto</a>
+                    </li>
+                    <li>
+                        <a href="#">Por Vendedor</a>
+                    </li>
+                    <li>
+                        <a href="#">Por Cliente</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- <li>
+                <a href="#">
+                  <span class="icono"><i class="fas fa-copy"></i></span>
+                  Estadisticas
+                </a>
+            </li> -->
+            <!-- <li>
+                <a href="#">
+                  <span class="icono"><i class="fas fa-shopping-cart"></i></span>
+                  Compras
+                </a>
+            </li> -->
+        </ul>
+
+    </nav>

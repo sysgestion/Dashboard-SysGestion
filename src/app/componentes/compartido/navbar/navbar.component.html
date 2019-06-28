@@ -1,4 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
 
+          <button type="button" id="sidebarCollapse" class="navbar-btn">
+            <i class="fa fa-bars"></i>
+          </button>
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-align-justify"></i>
+          </button>
+
+          <a class="navbar-brand  ml-3" [routerLink]="['home']">
+              {{ app_nombre }}
+          </a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" *ngIf="!isLogeado" routerLinkActive="active">
+                        <a class="nav-link" [routerLink]="['usuario', 'registro']">Registro</a>
+                    </li>
+                    <li class="nav-item mr-3" *ngIf="isLogeado" routerLinkActive="active">
+                        <!--Aqui debe ir el nombre de usuario-->
+                        <a class="nav-link"><span class="badge badge-success">+ 9</span> Perfil</a>
+                    </li>
+                    <li class="nav-item" *ngIf="!isLogeado" routerLinkActive="active">
+                        <a class="nav-link" [routerLink]="['usuario', 'login']">Ingresar</a>
+                    </li>
+                    <li class="nav-item" *ngIf="isLogeado" routerLinkActive="active">
+                        <button class="btn btn-outline-success" type="button" (click)="salir()">Salir</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
 
 

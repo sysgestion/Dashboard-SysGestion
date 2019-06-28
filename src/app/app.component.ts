@@ -1,8 +1,5 @@
-import { Component } from '@angular/core';
-
-declare let jQuery:any;
-declare let $:any;
-
+import { Component, Input } from '@angular/core';
+import { LoginComponent } from './componentes/login/login.component';
 
 
 @Component({
@@ -12,17 +9,25 @@ declare let $:any;
 })
 export class AppComponent {
 
+  
   title = 'cliente-dashboard-sys';
   public app_nombre: string = "SysGestion";
-  isLogeado:boolean = false;
+  public logeadoPadre:boolean = false;
 
-  constructor() { 
-    $(document).ready(function () {
-      $('#sidebarCollapse').on('click', function () {
-          $('#sidebar').toggleClass('active');
-          $(this).toggleClass('active');
-      });
-    });
+  constructor() { }
+  
+  /* este es el evento que usa el navbar cuando el usuario cierra sesion a traves del evento que emite*/
+  isLogeadoPadre(evento){
+    this.logeadoPadre = evento;
+  }
+  
+  onActivate(componenteQueEntra){
+    /* si el componente que entra es el login, nos subscribimos el evento que genera el output y actualizamos el login del padre que sera el que recibe el navbar como input */
+    if(componenteQueEntra.constructor.name === 'LoginComponent'){
+      componenteQueEntra.logeado.subscribe(data =>{
+        this.logeadoPadre = data;
+      })
+    }
   }
 
 }

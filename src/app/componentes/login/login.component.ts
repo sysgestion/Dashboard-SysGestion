@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private serUsuario: UsuarioService, private router: Router) { }
 
-  private usuario:UsuarioInterface = {
+  public usuario:UsuarioInterface = {
     correo : '',
     clave : ''
   }

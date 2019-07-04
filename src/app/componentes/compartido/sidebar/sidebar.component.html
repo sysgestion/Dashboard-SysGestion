@@ -22,7 +22,7 @@
                 </a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <li routerLinkActive="active">
-                        <a [routerLink]="['consulta', 'sp1076']">SP 1076</a>
+                        <a *ngIf="isLogeado" [routerLink]="['consulta', 'sp1076']">SP 1076</a>
                     </li>
                     <!-- <li>
                         <a href="#">SP 1080</a>
@@ -40,7 +40,7 @@
                 </a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <li routerLinkActive="active">
-                        <a [routerLink]="['venta', 'autorizaNV']">Autorización N. Venta</a>
+                        <a *ngIf="isLogeado" [routerLink]="['venta', 'autorizaNV']">Autorización N. Venta</a>
                     </li>
                     <li>
                         <a href="#">Por Producto</a>

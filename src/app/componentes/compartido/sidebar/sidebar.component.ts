@@ -19,6 +19,15 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.revisaUsuarioLogeado();
+  }
+
+  revisaUsuarioLogeado() {
+    if(!this.serUsuario.getUsuarioLocalStorage()){
+      this.isLogeado = false;
+    }else{
+      this.isLogeado = true;
+    }
   }
   
   

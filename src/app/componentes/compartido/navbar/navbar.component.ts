@@ -51,15 +51,16 @@ export class NavbarComponent implements OnInit, DoCheck{
 
   salir(){
     this.serUsuario.cerrarSesion();
-    this.router.navigate(['home']);
+    this.router.navigate(['usuario', 'login']);
     this.revisaUsuarioLogeado();
-    this.userActivo.emit(false);
     this.empresa = '';
+    /* location.reload(); */
   }
-
+  
   revisaUsuarioLogeado() {
     if(!this.serUsuario.getUsuarioLocalStorage()){
       this.isLogeado = false;
+      this.userActivo.emit(false);
     }else{
       this.isLogeado = true;
       this.empresa = this.serUsuario.getEmpresaActualLS().em_nombre;
@@ -69,6 +70,8 @@ export class NavbarComponent implements OnInit, DoCheck{
   cambiaEmpresa(empresa){
     this.empresa = empresa.em_nombre;
     this.serUsuario.setEmpresaActualLS(empresa);
+    this.router.navigate(['home']);
+    /* location.reload(); */
   }
 
 }

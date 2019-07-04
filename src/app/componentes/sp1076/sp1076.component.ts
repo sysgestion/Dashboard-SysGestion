@@ -73,6 +73,9 @@ export class Sp1076Component implements OnInit {
       this.loading = false;
     }, 1000);
 
+  }
+  
+  ngOnInit() { 
     /* Carga tablas vendedores y locales */
     this.serConsulta.consultaTablas().subscribe(data => {
       /* Recorro el arreglo de vendedores que viene de data y por cada elemento lo agrego al array de la vista */
@@ -82,8 +85,6 @@ export class Sp1076Component implements OnInit {
       /* this.loading = false; */
     });
   }
-
-  ngOnInit() { }
 
   cargarGrafico(){
 

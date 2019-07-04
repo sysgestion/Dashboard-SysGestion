@@ -40,7 +40,8 @@ export class ConsultasSPService {
 
     params = params.append('emp', emp.toString());
 
-    return this.http.get(`https://dashboard-sysgestion.herokuapp.com/tablas`, {headers:headers});
+    return this.http.get(`https://dashboard-sysgestion.herokuapp.com/tablas`, {headers:headers , params: params});
+    //return this.http.get(`http://localhost:3000/tablas`, {headers:headers, params: params});
   }
 
 

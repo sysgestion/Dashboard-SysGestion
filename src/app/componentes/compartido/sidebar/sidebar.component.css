@@ -227,3 +227,34 @@ a.article, a.article:hover {
     }
 
 }
+
+#sidebar li.dropdown > a {
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    padding: 0px;
+    background: none;
+    margin-right: 0;
+    border: 1px solid #F6F6F6;
+    background: #F6F6F6;
+}
+
+.icon-user i {
+    height: 33px;
+    width:33px;
+    line-height: 33px;
+    display: inline-block;
+    font-size: 1.7em;
+    padding-left: 10px;
+}
+
+.icon-user .nombreEmpresa {
+    color: #555555;
+    font-size: 13px;
+    position: relative;
+    top: -5px;
+}
+
+.icon-user .caret {
+    position: relative;
+    top: -4px;
+}

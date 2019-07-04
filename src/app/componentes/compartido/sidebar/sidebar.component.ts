@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  /* public empresas = []; */
+  @Input('isLogeadoSidebar') isLogeado: boolean = false;
+
+  constructor(private serUsuario: UsuarioService) {
+    /* if(this.serUsuario.getUsuarioLocalStorage()){
+      this.empresas = this.serUsuario.getUsuarioLocalStorage()['empresa'];
+    }
+    console.log(this.empresas); */
+  }
 
   ngOnInit() {
   }
+  
+  
 
 }

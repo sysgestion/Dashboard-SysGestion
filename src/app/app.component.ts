@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { LoginComponent } from './componentes/login/login.component';
+import { UsuarioService } from './servicios/usuario.service';
 
 
 @Component({
@@ -13,8 +13,9 @@ export class AppComponent {
   title = 'cliente-dashboard-sys';
   public app_nombre: string = "SysGestion";
   public logeadoPadre:boolean = false;
+  public empresaActual;
 
-  constructor() { }
+  constructor(private serUsuario: UsuarioService) { }
   
   /* este es el evento que usa el navbar cuando el usuario cierra sesion a traves del evento que emite*/
   isLogeadoPadre(evento){
@@ -26,6 +27,7 @@ export class AppComponent {
     if(componenteQueEntra.constructor.name === 'LoginComponent'){
       componenteQueEntra.logeado.subscribe(data =>{
         this.logeadoPadre = data;
+        this.empresaActual = this.serUsuario.getEmpresaActualLS()['em_nombre'];
       })
     }
   }

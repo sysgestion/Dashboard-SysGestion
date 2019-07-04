@@ -21,10 +21,23 @@ export class UsuarioService {
   setUsuarioLocalStorage(usuario){
     let usuario_string = JSON.stringify(usuario);
     localStorage.setItem('currentUser', usuario_string);
+    /* cuando se logea el usuario guarda la primera empresa en el ls */
+    this.setEmpresaActualLS(usuario.empresa[0]);
   }
 
   setTokenLocalStorage(token){
     localStorage.setItem('accessToken', token);
+  }
+
+  setEmpresaActualLS(empresa){
+    let empresa_string = JSON.stringify(empresa);
+    localStorage.setItem('emp', empresa_string);
+  }
+
+  getEmpresaActualLS(){
+    let empresa_string = localStorage.getItem('emp');
+    let empresa = JSON.parse(empresa_string);
+    return empresa;
   }
 
   getTokenLocalStorage(){
@@ -44,6 +57,7 @@ export class UsuarioService {
   cerrarSesion(){
     localStorage.removeItem('currentUser');
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('emp');
   }
 
 }

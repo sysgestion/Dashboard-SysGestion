@@ -88,6 +88,8 @@ export class Sp1076Component implements OnInit {
 
   cargarGrafico(){
 
+    this.dataSP = [];
+
     /* Inhabilito el boton de busqueda mientras se realiza la consulta*/
     this.cargandoDatos = true;
     

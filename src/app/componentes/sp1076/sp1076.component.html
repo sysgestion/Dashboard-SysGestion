@@ -3,6 +3,7 @@
 
 <div *ngIf="!loading">
 
+  <!-- consulta -->
   <div class="row animated fadeIn">
     <div class="col-sm-12">
       <section class="panel">
@@ -62,7 +63,7 @@
   </div>
 
   <!-- grafico -->
-  <div class="row animated fadeIn">
+  <div class="row animated fadeIn" *ngIf="dataSP.length > 0">
     <div class="col-sm-12">
         <section class="panel">
           <div class="panel-body">
@@ -93,7 +94,7 @@
   </div>
 
   <!-- tabla -->
-  <div class="row animated fadeIn">
+  <div class="row animated fadeIn" *ngIf="dataSP.length > 0">
     <div class="col-sm-12">
       <section class="panel">
         <div class="panel-body">

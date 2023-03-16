@@ -1,4 +1,4 @@
-# Cliente Dashboard SysGestion :sunglasses:
+# Cliente Dashboard SysGestion
 
 Start : `ng serve`
 

@@ -15,7 +15,7 @@ export class UsuarioService {
   loginUsuario(correo:string, clave:string){
     let headers = this._headers.append('Content-Type', 'application/json');
     
-    return this.http.post('https://dashboard-sysgestion.herokuapp.com/login', {correo, clave}, {headers});
+    return this.http.post('https://sysgestionweb.herokuapp.com/login', {correo, clave}, {headers});
   }
 
   setUsuarioLocalStorage(usuario){

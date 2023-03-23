@@ -19,7 +19,7 @@ export class VentasService {
     params = params.append('emp', emp.toString());
     params = params.append('fecini', activos.toString());
     
-    return this.http.get(`https://sysgestionweb.herokuapp.com/clientes`, {headers:headers, params: params});
+    return this.http.get(`https://mssql-node.herokuapp.com/clientes`, {headers:headers, params: params});
     /* .pipe(map(data => {
       return data['data'];
     })); */
@@ -34,7 +34,7 @@ export class VentasService {
     params = params.append('folio', folio.toString());
     
     //return this.http.get(`http://localhost:3000/notaventa`, {headers:headers, params: params});
-    return this.http.get(`https://sysgestionweb.herokuapp.com/notaventa`, {headers:headers, params: params});
+    return this.http.get(`https://mssql-node.herokuapp.com/notaventa`, {headers:headers, params: params});
   }
 
   autorizaNV(estado, folio){
@@ -48,7 +48,7 @@ export class VentasService {
     params = params.append('folio', folio.toString());
     
     //return this.http.get(`http://localhost:3000/autorizarnotaventa`, {headers:headers, params: params});
-    return this.http.get(`https://sysgestionweb.herokuapp.com/autorizarnotaventa`, {headers:headers, params: params});
+    return this.http.get(`https://mssql-node.herokuapp.com/autorizarnotaventa`, {headers:headers, params: params});
   }
 
 

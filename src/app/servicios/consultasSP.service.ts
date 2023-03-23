@@ -21,13 +21,8 @@ export class ConsultasSPService {
     params = params.append('fecter', parametros.ter.toString());
     params = params.append('codven', parametros.ven.toString());
     params = params.append('codloc', parametros.loc.toString());
-    
-    /* return this.http.get(`http://localhost:3000/sp1076`, {headers:headers, params: params})
-    .pipe(map(data => {
-      return data['data'];
-    })); */
 
-    return this.http.get(`https://sysgestionweb.herokuapp.com/sp1076`, {headers:headers, params: params})
+    return this.http.get(`https://mssql-node.herokuapp.com/sp1076`, {headers:headers, params: params})
     .pipe(map(data => {
       return data['data'];
     }));
@@ -40,8 +35,7 @@ export class ConsultasSPService {
 
     params = params.append('emp', emp.toString());
 
-    return this.http.get(`https://sysgestionweb.herokuapp.com/tablas`, {headers:headers , params: params});
-    //return this.http.get(`http://localhost:3000/tablas`, {headers:headers, params: params});
+    return this.http.get(`https://mssql-node.herokuapp.com/tablas`, {headers:headers , params: params});
   }
 
 
